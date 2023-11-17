@@ -1,9 +1,10 @@
-[gd_scene load_steps=72 format=3 uid="uid://mb5840mw6gb2"]
+[gd_scene load_steps=73 format=3 uid="uid://mb5840mw6gb2"]
 
 [ext_resource type="Texture2D" uid="uid://bc5agf1jym3of" path="res://assets/space_background.png" id="1_ug3b0"]
 [ext_resource type="Texture2D" uid="uid://b08svq210xq2l" path="res://assets/girl01.png" id="1_vo1jo"]
 [ext_resource type="Texture2D" uid="uid://buu7xtcfjeswr" path="res://assets/girl_walkcycle02.png" id="2_4nq5e"]
 [ext_resource type="Texture2D" uid="uid://b8xudimcki70j" path="res://assets/land_tile02.png" id="2_f7uln"]
+[ext_resource type="Script" path="res://scripts/Walk.gd" id="3_dxfpg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fbf1p"]
 texture = ExtResource("1_ug3b0")
@@ -861,7 +862,7 @@ advance_condition = &"idle"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_e8r1l"]
 states/idle/node = SubResource("AnimationNodeBlendSpace2D_wlvvs")
-states/idle/position = Vector2(414.295, 101.5)
+states/idle/position = Vector2(414.295, 100.375)
 states/walk/node = SubResource("AnimationNodeBlendSpace2D_r2nlx")
 states/walk/position = Vector2(703.295, 100.75)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_iub40"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_gsuae"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_1muxb")]
@@ -884,13 +885,14 @@ layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array(327681, 65538, 4, 393222, 393218, 5, 131068, 2, 2, 196604, 2, 3, 131069, 65538, 2, 196605, 65538, 3, 262141, 65538, 4, 65534, 131074, 1, 131070, 131074, 2, 196606, 131074, 3, 262142, 131074, 4, 65535, 196610, 1, 131071, 196610, 2, 196607, 196610, 3, 262143, 196610, 4, 327679, 196610, 5, 0, 262146, 1, 65536, 262146, 2, 131072, 262146, 3, 196608, 262146, 4, 262144, 262146, 5, 1, 327682, 1, 65537, 327682, 2, 131073, 327682, 3, 196609, 327682, 4, 262145, 327682, 5, 65538, 393218, 2, 131074, 393218, 3, 196610, 393218, 4, 262146, 393218, 5, 65539, 458754, 2, 131075, 458754, 3, 196611, 458754, 4)
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("3_dxfpg")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
 sprite_frames = SubResource("SpriteFrames_deuo7")
-animation = &"idle"
-frame_progress = 0.423979
+animation = &"walk"
+frame_progress = 0.353447
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(-2, 10)
