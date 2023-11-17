@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://mb5840mw6gb2"]
+[gd_scene load_steps=72 format=3 uid="uid://mb5840mw6gb2"]
 
 [ext_resource type="Texture2D" uid="uid://bc5agf1jym3of" path="res://assets/space_background.png" id="1_ug3b0"]
 [ext_resource type="Texture2D" uid="uid://b08svq210xq2l" path="res://assets/girl01.png" id="1_vo1jo"]
@@ -844,6 +844,29 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tfa4v"]
 height = 36.0
 
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_wlvvs"]
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_r2nlx"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iub40"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gsuae"]
+advance_mode = 2
+advance_condition = &"is moving"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1muxb"]
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_e8r1l"]
+states/idle/node = SubResource("AnimationNodeBlendSpace2D_wlvvs")
+states/idle/position = Vector2(414.295, 101.5)
+states/walk/node = SubResource("AnimationNodeBlendSpace2D_r2nlx")
+states/walk/position = Vector2(703.295, 100.75)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_iub40"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_gsuae"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_1muxb")]
+graph_offset = Vector2(141.295, 0)
+
 [node name="Node2D" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -862,6 +885,8 @@ layer_1/tile_data = PackedInt32Array(327681, 65538, 4, 393222, 393218, 5, 131068
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D"]
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
 sprite_frames = SubResource("SpriteFrames_deuo7")
 animation = &"idle"
@@ -870,5 +895,13 @@ frame_progress = 0.423979
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(-2, 10)
 shape = SubResource("CapsuleShape2D_tfa4v")
+
+[node name="AnimationTree" type="AnimationTree" parent="CharacterBody2D"]
+tree_root = SubResource("AnimationNodeStateMachine_e8r1l")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/idle = false
+"parameters/conditions/is moving" = false
+parameters/idle/blend_position = Vector2(0, 0)
+parameters/walk/blend_position = Vector2(0, 0)
 
 [node name="Camera2D" type="Camera2D" parent="."]
