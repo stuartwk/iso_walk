@@ -1,0 +1,68 @@
+[gd_scene load_steps=12 format=3 uid="uid://bw3sh1txjnugr"]
+
+[ext_resource type="Script" path="res://girl.gd" id="1_1o3jh"]
+[ext_resource type="Texture2D" uid="uid://cb0kqwm0gk74r" path="res://assets/girl_idle-walkcycle.png" id="2_m6gp3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xajwh"]
+size = Vector2(27, 39)
+
+[sub_resource type="Animation" id="Animation_5d2ff"]
+resource_name = "idle_down"
+length = 2.0
+loop_mode = 1
+
+[sub_resource type="Animation" id="Animation_kbxxh"]
+resource_name = "walk_left"
+
+[sub_resource type="Animation" id="Animation_e0jak"]
+resource_name = "walk_right"
+
+[sub_resource type="Animation" id="Animation_003j1"]
+resource_name = "walk_down"
+length = 6.0
+
+[sub_resource type="Animation" id="Animation_10lr3"]
+resource_name = "walk_up"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ux8oi"]
+_data = {
+"idle_down": SubResource("Animation_5d2ff"),
+"walk_down": SubResource("Animation_003j1"),
+"walk_left": SubResource("Animation_kbxxh"),
+"walk_right": SubResource("Animation_e0jak"),
+"walk_up": SubResource("Animation_10lr3")
+}
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_blw86"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_abs7h"]
+states/idle/node = SubResource("AnimationNodeBlendSpace2D_blw86")
+states/idle/position = Vector2(349, 84)
+
+[node name="girl" type="CharacterBody2D"]
+position = Vector2(88, 190)
+script = ExtResource("1_1o3jh")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2.5, 11.5)
+shape = SubResource("RectangleShape2D_xajwh")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, 0)
+scale = Vector2(0.96875, 1)
+texture = ExtResource("2_m6gp3")
+hframes = 50
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ux8oi")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_abs7h")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/idle/blend_position = Vector2(0, 0)

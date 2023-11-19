@@ -901,6 +901,7 @@ shape = SubResource("CapsuleShape2D_tfa4v")
 [node name="AnimationTree" type="AnimationTree" parent="CharacterBody2D"]
 tree_root = SubResource("AnimationNodeStateMachine_e8r1l")
 anim_player = NodePath("../AnimationPlayer")
+active = true
 parameters/conditions/idle = false
 "parameters/conditions/is moving" = false
 parameters/idle/blend_position = Vector2(0, 0)

@@ -15,6 +15,25 @@ run/main_scene="res://node_2d.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[input]
+
+walk_right={
+"deadzone": 0.5,
+"events": []
+}
+walk_left={
+"deadzone": 0.5,
+"events": []
+}
+walk_down={
+"deadzone": 0.5,
+"events": []
+}
+walk_up={
+"deadzone": 0.5,
+"events": []
+}
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
