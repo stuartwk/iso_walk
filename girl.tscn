@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bw3sh1txjnugr"]
+[gd_scene load_steps=12 format=3 uid="uid://bew5m8vhf0pye"]
 
 [ext_resource type="Script" path="res://girl.gd" id="1_1o3jh"]
 [ext_resource type="Texture2D" uid="uid://cb0kqwm0gk74r" path="res://assets/girl_idle-walkcycle.png" id="2_m6gp3"]
@@ -11,15 +11,15 @@ resource_name = "idle_down"
 length = 2.0
 loop_mode = 1
 
+[sub_resource type="Animation" id="Animation_003j1"]
+resource_name = "walk_down"
+length = 6.0
+
 [sub_resource type="Animation" id="Animation_kbxxh"]
 resource_name = "walk_left"
 
 [sub_resource type="Animation" id="Animation_e0jak"]
 resource_name = "walk_right"
-
-[sub_resource type="Animation" id="Animation_003j1"]
-resource_name = "walk_down"
-length = 6.0
 
 [sub_resource type="Animation" id="Animation_10lr3"]
 resource_name = "walk_up"
