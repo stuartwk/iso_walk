@@ -12,13 +12,20 @@ extends CharacterBody2D
 func _process(delta):
 	## we are watching for input actions here
 	if Input.is_action_pressed("ui_right"):
-		_animated_sprite.play('walk')
+		_animated_sprite.play('walk_right')
 		velocity.x = 1
 	elif Input.is_action_pressed("ui_left"):
-		_animated_sprite.play('walk')
+		_animated_sprite.play('walk_left')
 		velocity.x = -1
+	elif Input.is_action_pressed("ui_down"):
+		_animated_sprite.play("walk_down")
+		velocity.y = 1
+	elif Input.is_action_pressed("ui_up"):
+		_animated_sprite.play("walk_up")
+		velocity.y = -1
 	else: 
 		velocity.x = 0
+		velocity.y = 0
 		_animated_sprite.play('idle')
 	
 	velocity = velocity.normalized() * speed
