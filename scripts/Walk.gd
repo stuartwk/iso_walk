@@ -4,6 +4,7 @@ extends CharacterBody2D
 ## know where to find the AnimatedSprite2D?
 ## maybe it just checks for the closest child node?
 @onready var _animated_sprite = $AnimatedSprite2D
+@onready var _tileMap = get_node("../TileMap")
 
 @export var speed: int = 80.0;
 
@@ -27,6 +28,12 @@ func _process(delta):
 		velocity.x = 0
 		velocity.y = 0
 		_animated_sprite.play('idle')
+
+	var new_position = global_position + velocity * speed * delta
 	
-	velocity = velocity.normalized() * speed
-	move_and_slide()
+	# Check if the character is on a foreground tile
+	var is_on_foreground = _tileMap.is_on_foreground(new_position)
+
+	if is_on_foreground:
+		velocity = velocity.normalized() * speed
+		move_and_slide()
